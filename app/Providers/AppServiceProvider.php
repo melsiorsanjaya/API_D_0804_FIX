@@ -3,7 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Carbon\Carbon;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,9 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-        config(['app.locale'=>'id']);
-        Carbon::setLocale('id');
-        date_default_timezone_set('Asia/Jakarta');
+        Paginator::useBootstrap();
+        Blade::directive('rupiah', function ($expression) {
+            return "Rp. <?php echo
+            number_format($expression,0,',','.'); ?>";
+        });
     }
 }
