@@ -25,6 +25,7 @@ class Customer extends Model
         'alamat',
         'tgl_lahir',
         'no_telp',
+        
 
     ];
 }
